@@ -10,7 +10,7 @@ public class ExitCommand implements ICommand {
         CommandRegistry.register(instance);
     }
 
-    public boolean execute(AtomicBoolean shouldRun) {
+    public boolean execute(CommandRequest commandRequest, AtomicBoolean shouldRun) {
         shouldRun.set(false);
         return true;
     }

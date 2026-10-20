@@ -15,7 +15,7 @@ public class Main {
             CommandRequest commandRequest = CommandRequest.builder().request(commandLineRequest).build();
             CommandRegistry.populateCommand(commandRequest);
             if (commandRequest.getCommand() != null) {
-               commandRequest.getCommand().execute(shouldRun);
+               commandRequest.getCommand().execute(commandRequest, shouldRun);
             }
             else {
                 System.out.printf("%s: command not found\n", commandLineRequest);
