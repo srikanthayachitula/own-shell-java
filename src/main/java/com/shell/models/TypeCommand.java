@@ -2,6 +2,7 @@ package com.shell.models;
 
 import com.shell.util.CommandRegistry;
 
+import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TypeCommand implements ICommand {
@@ -14,7 +15,17 @@ public class TypeCommand implements ICommand {
             System.out.println(command + " is a shell builtin");
         }
         else {
-            System.out.println(command + ": not found");
+           String PATH = System.getenv("PATH");
+           String [] paths = PATH.split(":/");
+           for (String path : paths) {
+               File file = new File(path);
+               if (file.exists() && file.canExecute() &&  command.equals(file.getName())) {
+                   System.out.printf("%s is %s%n", command, path);
+                   return true;
+               }
+           }
+
+           System.out.println(command + ": not found");
         }
 
         return true;
