@@ -15,20 +15,17 @@ public class TypeCommand implements ICommand {
             System.out.println(command + " is a shell builtin");
         }
         else {
-           String PATH = System.getenv("PATH");
-           String [] paths = PATH.split(":");
-           for (String path : paths) {
-               File file = new File(path + "/" + command);
-               if (file.exists() && file.canExecute()) {
-                   System.out.printf("%s is %s%n", command, file.getAbsolutePath());
+                String executableFile =  CommandRegistry.isFileExecutable(command);
+                if (!executableFile.isEmpty()) {
+                   System.out.printf("%s is %s%n", command, executableFile);
                    return true;
                }
            }
 
            System.out.println(command + ": not found");
-        }
+            return true;
 
-        return true;
+
     }
 
     @Override

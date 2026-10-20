@@ -17,7 +17,19 @@ public class Main {
                commandRequest.getCommand().execute(commandRequest, shouldRun);
             }
             else {
-                System.out.printf("%s: command not found\n", commandLineRequest);
+                String [] commands = commandLineRequest.split(" ");
+                String executableFile = CommandRegistry.isFileExecutable(commands[0]);
+                if (!executableFile.isEmpty()) {
+                    try {
+                        commands[0] = executableFile;
+                        Process process = Runtime.getRuntime().exec(commands);
+                        process.waitFor();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else System.out.printf("%s: command not found\n", commandLineRequest);
             }
         }
         while (shouldRun.get());

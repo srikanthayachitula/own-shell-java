@@ -3,6 +3,7 @@ package com.shell.util;
 import com.shell.models.CommandRequest;
 import com.shell.models.ICommand;
 
+import java.io.File;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -35,4 +36,18 @@ public class CommandRegistry {
                       .orElse(null));
 
     }
+
+    public static String isFileExecutable(String fileName) {
+        String PATH = System.getenv("PATH");
+        String [] paths = PATH.split(":");
+        for (String path : paths) {
+            File file = new File(path + "/" + fileName);
+            if (file.exists() && file.canExecute())  return file.getAbsolutePath();
+        }
+
+        return "";
+    }
+
+
+
 }
