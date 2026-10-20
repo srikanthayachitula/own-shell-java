@@ -3,14 +3,18 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
         // TODO: Uncomment the code below to pass the first stage
-         System.out.print("$ ");
-         String command = readInput();
-         if (isValidCommand(command)) {
+        do {
+            System.out.print("$ ");
+            String command = readInput();
+            if (isValidCommand(command)) {
 
-         }
-         else {
-             System.out.printf("%s: command not found", command);
-         }
+            }
+            else {
+                System.out.printf("%s: command not found", command);
+            }
+        }
+        while (true);
+
     }
 
 
