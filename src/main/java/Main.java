@@ -22,11 +22,15 @@ public class Main {
                 if (!executableFile.isEmpty()) {
                     try {
                         commands[0] = executableFile;
-                        Process process = Runtime.getRuntime().exec(commands);
-                        process.waitFor();
+                        ProcessBuilder process = new  ProcessBuilder(commands);
+                        process.inheritIO();
+                        process.start().waitFor();
                     }
                     catch (Exception e) {
                         e.printStackTrace();
+                    }
+                    finally {
+
                     }
                 }
                 else System.out.printf("%s: command not found\n", commandLineRequest);
