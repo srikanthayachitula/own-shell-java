@@ -1,3 +1,5 @@
+package com.shell.models;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public interface ICommand {

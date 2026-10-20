@@ -1,6 +1,10 @@
+package com.shell.models;
+
+import com.shell.util.CommandRegistry;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ExitCommand implements ICommand{
+public class ExitCommand implements ICommand {
     private final static ICommand instance = new ExitCommand();
     static  {
         CommandRegistry.register(instance);
