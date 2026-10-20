@@ -18,8 +18,8 @@ public class TypeCommand implements ICommand {
            String PATH = System.getenv("PATH");
            String [] paths = PATH.split(":/");
            for (String path : paths) {
-               File file = new File(path);
-               if (file.exists() && file.canExecute() &&  command.equals(file.getName())) {
+               File file = new File(path + "/" + command);
+               if (file.exists() && file.canExecute()) {
                    System.out.printf("%s is %s%n", command, path);
                    return true;
                }
