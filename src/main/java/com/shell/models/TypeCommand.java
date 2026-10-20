@@ -20,11 +20,12 @@ public class TypeCommand implements ICommand {
                    System.out.printf("%s is %s%n", command, executableFile);
                    return true;
                }
+            System.out.println(command + ": not found");
+
            }
 
-           System.out.println(command + ": not found");
-            return true;
 
+        return true;
 
     }
 
