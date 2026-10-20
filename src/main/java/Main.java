@@ -10,7 +10,6 @@ public class Main {
         CommandRegistry.autoRegisterAllCommands();
         AtomicBoolean shouldRun = new AtomicBoolean(true);
         do {
-            System.out.print("$ ");
             String commandLineRequest = readInput();
             CommandRequest commandRequest = CommandRequest.builder().request(commandLineRequest).build();
             CommandRegistry.populateCommand(commandRequest);
@@ -31,6 +30,7 @@ public class Main {
     }
 
     private static String readInput() {
+        System.out.print("$ ");
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }

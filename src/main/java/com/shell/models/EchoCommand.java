@@ -6,7 +6,7 @@ public class EchoCommand implements ICommand{
     private static ICommand INSTANCE = new EchoCommand();
     @Override
     public boolean execute(CommandRequest commandRequest, AtomicBoolean shouldRun) {
-        System.out.println("\n"+ commandRequest.getRequest().substring(5));
+        System.out.println(commandRequest.getRequest().substring(5));
         return true;
     }
 
