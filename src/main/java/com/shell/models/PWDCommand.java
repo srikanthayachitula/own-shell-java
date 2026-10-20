@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PWDCommand implements ICommand {
 
-    private ICommand instance = new PWDCommand();
+    private static final ICommand instance = new PWDCommand();
     @Override
     public boolean execute(CommandRequest request, AtomicBoolean shouldRun) {
        System.out.println(Paths.get("").toAbsolutePath().toString());
