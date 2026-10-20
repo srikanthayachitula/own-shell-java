@@ -1,0 +1,23 @@
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public class ExitCommand implements ICommand{
+    private final static ICommand instance = new ExitCommand();
+    static  {
+        CommandRegistry.register(instance);
+    }
+
+    public boolean execute(AtomicBoolean shouldRun) {
+        shouldRun.set(false);
+        return true;
+    }
+
+    public   ICommand getInstance() {
+        return instance;
+    }
+
+    public String  getSignature() {
+        return "exit";
+    }
+
+
+}

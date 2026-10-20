@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         // TODO: Uncomment the code below to pass the first stage
+        AtomicBoolean shouldRun = new AtomicBoolean(true);
         do {
             System.out.print("$ ");
             String command = readInput();
@@ -13,7 +15,7 @@ public class Main {
                 System.out.printf("%s: command not found\n", command);
             }
         }
-        while (true);
+        while (shouldRun.get());
 
     }
 
