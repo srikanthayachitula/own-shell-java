@@ -21,7 +21,7 @@ public class Main {
                 String executableFile = CommandRegistry.isFileExecutable(commands[0]);
                 if (!executableFile.isEmpty()) {
                     try {
-                        commands[0] = executableFile;
+                        //commands[0] = executableFile;
                         ProcessBuilder process = new  ProcessBuilder(commands);
                         process.inheritIO();
                         process.start().waitFor();
