@@ -9,7 +9,7 @@ public class Main {
 
          }
          else {
-             System.out.printf("%s : command not found", command);
+             System.out.printf("%s: command not found", command);
          }
     }
 
