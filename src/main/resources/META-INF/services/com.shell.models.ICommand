@@ -1,2 +1,3 @@
 com.shell.models.ExitCommand
 com.shell.models.EchoCommand
+com.shell.models.TypeCommand

@@ -18,11 +18,11 @@ public class EchoCommand implements ICommand{
 
     @Override
     public String getSignature() {
-        return "echo ";
+        return "echo";
     }
 
     @Override
     public boolean matches(String commandLineRequest) {
-        return commandLineRequest.startsWith(getSignature());
+        return commandLineRequest.startsWith(getSignature() + " ");
     }
 }

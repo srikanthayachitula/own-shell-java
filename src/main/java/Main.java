@@ -31,6 +31,7 @@ public class Main {
 
     private static String readInput() {
         System.out.print("$ ");
+        System.out.flush();
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
