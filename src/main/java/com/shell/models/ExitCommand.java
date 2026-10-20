@@ -23,5 +23,10 @@ public class ExitCommand implements ICommand {
         return "exit";
     }
 
+    @Override
+    public boolean matches(String commandLineRequest) {
+        return getSignature().equals(commandLineRequest);
+    }
+
 
 }

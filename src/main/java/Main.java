@@ -1,4 +1,4 @@
-import com.shell.models.ICommand;
+import com.shell.models.CommandRequest;
 import com.shell.util.CommandRegistry;
 
 import java.util.Scanner;
@@ -11,13 +11,14 @@ public class Main {
         AtomicBoolean shouldRun = new AtomicBoolean(true);
         do {
             System.out.print("$ ");
-            String command = readInput();
-            if (isValidCommand(command)) {
-                ICommand commandInstance = CommandRegistry.getInstance(command);
-                commandInstance.execute(shouldRun);
+            String commandLineRequest = readInput();
+            CommandRequest commandRequest = CommandRequest.builder().request(commandLineRequest).build();
+            CommandRegistry.populateCommand(commandRequest);
+            if (commandRequest.getCommand() != null) {
+               commandRequest.getCommand().execute(shouldRun);
             }
             else {
-                System.out.printf("%s: command not found\n", command);
+                System.out.printf("%s: command not found\n", commandLineRequest);
             }
         }
         while (shouldRun.get());

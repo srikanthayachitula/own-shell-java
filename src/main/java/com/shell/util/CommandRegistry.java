@@ -1,5 +1,6 @@
 package com.shell.util;
 
+import com.shell.models.CommandRequest;
 import com.shell.models.ICommand;
 
 import java.util.ServiceLoader;
@@ -21,7 +22,17 @@ public class CommandRegistry {
 
     public static void autoRegisterAllCommands() {
         ServiceLoader.load(ICommand.class).forEach(CommandRegistry::register);
+    }
 
+    public static void populateCommand(CommandRequest commandRequest) {
+      commandRequest
+              .setCommand(commands
+                      .values().
+                      stream().
+                      filter(command -> command
+                              .matches(commandRequest.getRequest()))
+               .findFirst()
+                      .orElse(null));
 
     }
 }
