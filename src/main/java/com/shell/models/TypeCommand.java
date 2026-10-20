@@ -16,11 +16,11 @@ public class TypeCommand implements ICommand {
         }
         else {
            String PATH = System.getenv("PATH");
-           String [] paths = PATH.split(":/");
+           String [] paths = PATH.split(":");
            for (String path : paths) {
                File file = new File(path + "/" + command);
                if (file.exists() && file.canExecute()) {
-                   System.out.printf("%s is %s%n", command, path);
+                   System.out.printf("%s is %s%n", command, file.getAbsolutePath());
                    return true;
                }
            }
