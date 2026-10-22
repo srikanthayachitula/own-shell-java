@@ -24,7 +24,7 @@ public class Main {
     }
 
     private static void renderDefaultCommandMessage() {
-        System.out.printf(Messages.INITIAL_MESSAGE + "\n");
+        System.out.printf(Messages.INITIAL_MESSAGE );
         System.out.flush();
     }
     private static String readInput() {
