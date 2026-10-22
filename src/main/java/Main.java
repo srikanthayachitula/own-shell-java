@@ -1,4 +1,5 @@
-import com.shell.models.CommandRequest;
+import com.shell.Constants.Messages;
+import com.shell.models.ShellContext;
 import com.shell.util.CommandRegistry;
 
 import java.util.Scanner;
@@ -6,37 +7,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // TODO: Uncomment the code below to pass the first stage
         CommandRegistry.autoRegisterAllCommands();
-        AtomicBoolean shouldRun = new AtomicBoolean(true);
+        ShellContext shellContext = ShellContext.builder().build();
         do {
+            renderDefaultCommandMessage();
             String commandLineRequest = readInput();
-            CommandRequest commandRequest = CommandRequest.builder().request(commandLineRequest).build();
-            CommandRegistry.populateCommand(commandRequest);
-            if (commandRequest.getCommand() != null) {
-               commandRequest.getCommand().execute(commandRequest, shouldRun);
-            }
-            else {
-                String [] commands = commandLineRequest.split(" ");
-                String executableFile = CommandRegistry.isFileExecutable(commands[0]);
-                if (!executableFile.isEmpty()) {
-                    try {
-                        //commands[0] = executableFile;
-                        ProcessBuilder process = new  ProcessBuilder(commands);
-                        process.inheritIO();
-                        process.start().waitFor();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    finally {
-
-                    }
-                }
-                else System.out.printf("%s: command not found\n", commandLineRequest);
-            }
+            shellContext.handleRequest(commandLineRequest);
         }
-        while (shouldRun.get());
+        while (shellContext.getShouldRun());
 
     }
 
@@ -45,9 +23,11 @@ public class Main {
         return  CommandRegistry.isCommandRegistered(command);
     }
 
-    private static String readInput() {
-        System.out.print("$ ");
+    private static void renderDefaultCommandMessage() {
+        System.out.printf(Messages.INITIAL_MESSAGE + "\n");
         System.out.flush();
+    }
+    private static String readInput() {
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }

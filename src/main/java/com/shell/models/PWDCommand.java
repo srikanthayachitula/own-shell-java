@@ -1,14 +1,11 @@
 package com.shell.models;
 
-import java.nio.file.Paths;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class PWDCommand implements ICommand {
 
     private static final ICommand instance = new PWDCommand();
     @Override
-    public boolean execute(CommandRequest request, AtomicBoolean shouldRun) {
-       System.out.println(Paths.get("").toAbsolutePath().toString());
+    public boolean execute(ShellContext shellContext) {
+       System.out.println(shellContext.getCurrentWorkingDirectory().toAbsolutePath());
        return true;
     }
 

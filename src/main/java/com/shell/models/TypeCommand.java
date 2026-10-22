@@ -9,8 +9,8 @@ public class TypeCommand implements ICommand {
     private static final  TypeCommand INSTANCE = new TypeCommand();
 
     @Override
-    public boolean execute(CommandRequest request, AtomicBoolean shouldRun) {
-        String command = request.getRequest().substring(5);
+    public boolean execute(ShellContext shellContext) {
+        String command = shellContext.getCurrentCommandRequest().substring(5);
         if (CommandRegistry.isCommandRegistered(command)) {
             System.out.println(command + " is a shell builtin");
         }

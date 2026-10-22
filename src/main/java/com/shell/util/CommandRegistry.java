@@ -1,7 +1,7 @@
 package com.shell.util;
 
-import com.shell.models.CommandRequest;
 import com.shell.models.ICommand;
+import com.shell.models.ShellContext;
 
 import java.io.File;
 import java.util.ServiceLoader;
@@ -25,16 +25,14 @@ public class CommandRegistry {
         ServiceLoader.load(ICommand.class).forEach(CommandRegistry::register);
     }
 
-    public static void populateCommand(CommandRequest commandRequest) {
-      commandRequest
-              .setCommand(commands
-                      .values().
-                      stream().
-                      filter(command -> command
-                              .matches(commandRequest.getRequest()))
-               .findFirst()
-                      .orElse(null));
-
+    public static ICommand getMatchingCommand(ShellContext shellContext) {
+        return commands
+                .values().
+                stream().
+                filter(command -> command
+                        .matches(shellContext.getCurrentCommandRequest()))
+                .findFirst()
+                .orElse(null);
     }
 
     public static String isFileExecutable(String fileName) {
