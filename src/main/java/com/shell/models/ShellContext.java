@@ -16,6 +16,7 @@ import static com.shell.Constants.Messages.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShellContext {
+    @Builder.Default
     private AtomicBoolean shouldRun = new AtomicBoolean(true);
     @Builder.Default
     private Path currentWorkingDirectory = Paths.get("");
