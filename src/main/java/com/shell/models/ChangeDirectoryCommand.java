@@ -20,17 +20,18 @@ public class ChangeDirectoryCommand implements ICommand {
         return true;
     }
 
+
     private String getRequestPath(ShellContext shellContext) {
         String path = shellContext.getCurrentCommandRequest()
                 .substring(3)
                 .replaceAll("^\"|\"$", "");
 
         if (path.equals("~")) {
-            return System.getProperty("user.home");
+            return System.getenv("HOME");
         }
 
         if (path.startsWith("~/") || path.startsWith("~\\")) {
-            return System.getProperty("user.home") + path.substring(1);
+            return System.getenv("HOME") + path.substring(1);
         }
 
         return path;
